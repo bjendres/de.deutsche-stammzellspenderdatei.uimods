@@ -14,7 +14,9 @@
 | written permission from the original author(s).        |
 +--------------------------------------------------------*/
 
-/**
+use CRM_Uimods_ExtensionUtil as E;
+
+  /**
  * Class CRM_Uimods_Activity
  */
 class CRM_Uimods_Activity {
@@ -39,6 +41,16 @@ class CRM_Uimods_Activity {
     CRM_Core_Region::instance('page-body')->add(array(
       'script' => $script,
     ));
+
+    if ($formName == 'CRM_Activity_Form_Activity') {
+      /* @var CRM_Activity_Form_Activity $form */
+
+      $location_field = $form->getElement('location');
+      $location_field->setLabel($location_field->getLabel() . ', Adresse der Aktivität');
+
+      $date_field = $form->getElement('activity_date_time');
+      $date_field->setLabel($date_field->getLabel() . ', Beginn der Aktivität');
+    }
   }
 
 }

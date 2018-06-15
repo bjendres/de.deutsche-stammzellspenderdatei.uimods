@@ -64,11 +64,13 @@
             .find('table.form-layout-compressed').removeClass('form-layout-compressed').addClass('form-layout')
             .find('tr').changeElementType('td').children().changeElementType('div');
 
+      // Group fields per day (three fields: start, end, notes).
       $additionalInformationDaysBlock
         .find('.custom_field-row:nth-child(3n + 1)').each(function () {
         var $fields = $(this).add($(this).nextAll(':lt(2)'));
         var $row = $('<tr>').css('display', 'table-row').insertBefore($(this)).append($fields);
 
+        // Resize time fields.
         $row.find('.crm-form-time')
           .attr('size', 5)
           .css({
@@ -92,6 +94,20 @@
 
       $additionalInformationDaysBlock.insertBefore($detailsBlock);
     }
+
+    // Hide the "Time" component of the activity_date_time field and remove its
+    // value.
+    var $activityDateTimeFields = $('#activity_date_time').siblings('[name^="activity_date_time_display_"]').andSelf();
+    $activityDateTimeFields.on('change', function() {
+      $(this).siblings('#activity_date_time_time').val('');
+    });
+    $activityDateTimeFields
+      .change()
+      .siblings('#activity_date_time_time').hide().end()
+      .siblings('label[for="activity_date_time_time"]').hide();
+
+    // Hide "Duration" block.
+    $('.crm-activity-form-block-duration').hide();
   });
 
 })(cj);
