@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<extension key="de.deutschestammzellenspenderdatei.uimods" type="module">
+<extension key="de.deutsche-stammzellspenderdatei.uimods" type="module">
   <file>uimods</file>
   <name>DSD UI modifications</name>
   <description>Project-specific modifications of CiviCRM UI and behavior.</description>
@@ -9,9 +9,9 @@
     <email>info@systopia.de</email>
   </maintainer>
   <urls>
-    <url desc="Main Extension Page">https://github.com/systopia/de.deutschestammzellenspenderdatei.uimods</url>
-    <url desc="Documentation">https://github.com/systopia/de.deutschestammzellenspenderdatei.uimods/blob/master/README.md</url>
-    <url desc="Support">https://github.com/systopia/de.deutschestammzellenspenderdatei.uimods/issues</url>
+    <url desc="Main Extension Page">https://github.com/systopia/de.deutsche-stammzellspenderdatei.uimods</url>
+    <url desc="Documentation">https://github.com/systopia/de.deutsche-stammzellspenderdatei.uimods/blob/master/README.md</url>
+    <url desc="Support">https://github.com/systopia/de.deutsche-stammzellspenderdateiZ.uimods/issues</url>
     <url desc="Licensing">http://www.gnu.org/licenses/agpl-3.0.html</url>
   </urls>
   <releaseDate></releaseDate>

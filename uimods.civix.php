@@ -8,7 +8,7 @@
  */
 class CRM_Uimods_ExtensionUtil {
   const SHORT_NAME = "uimods";
-  const LONG_NAME = "de.deutschestammzellenspenderdatei.uimods";
+  const LONG_NAME = "de.deutsche-stammzellspenderdatei.uimods";
   const CLASS_PREFIX = "CRM_Uimods";
 
   /**
