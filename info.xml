@@ -11,11 +11,11 @@
   <urls>
     <url desc="Main Extension Page">https://github.com/systopia/de.deutsche-stammzellspenderdatei.uimods</url>
     <url desc="Documentation">https://github.com/systopia/de.deutsche-stammzellspenderdatei.uimods/blob/master/README.md</url>
-    <url desc="Support">https://github.com/systopia/de.deutsche-stammzellspenderdateiZ.uimods/issues</url>
+    <url desc="Support">https://github.com/systopia/de.deutsche-stammzellspenderdatei.uimods/issues</url>
     <url desc="Licensing">http://www.gnu.org/licenses/agpl-3.0.html</url>
   </urls>
-  <releaseDate></releaseDate>
-  <version>0.1-dev</version>
+  <releaseDate>2018-07-04</releaseDate>
+  <version>0.1</version>
   <develStage>dev</develStage>
   <compatibility>
     <ver>4.7</ver>
