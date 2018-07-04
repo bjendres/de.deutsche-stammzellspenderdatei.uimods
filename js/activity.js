@@ -44,7 +44,7 @@
   $(document).on('crmLoad', function () {
     var $activityForm = $('form.CRM_Activity_Form_Activity');
     var $detailsBlock = $('.crm-activity-form-block-details', $activityForm);
-    var $additionalInformationDaysAnchor = $('#custom_group_4_1');
+    var $additionalInformationDaysAnchor = $('#custom_group_' + CRM.vars.uimods.activityDaysGroupId + '_1');
     var $additionalInformationDaysBlock = $additionalInformationDaysAnchor.prev('.custom-group');
 
     // Move additional information block before details block and format it as a

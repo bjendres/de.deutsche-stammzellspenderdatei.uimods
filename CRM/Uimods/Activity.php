@@ -37,13 +37,18 @@ class CRM_Uimods_Activity {
    * @param $form
    */
   public static function buildForm($formName, &$form) {
-    $script = file_get_contents(__DIR__ . '/../../js/activity.js');
-    CRM_Core_Region::instance('page-body')->add(array(
-      'script' => $script,
-    ));
-
     if ($formName == 'CRM_Activity_Form_Activity') {
       /* @var CRM_Activity_Form_Activity $form */
+
+      $script = file_get_contents(__DIR__ . '/../../js/activity.js');
+      CRM_Core_Region::instance('page-body')->add(array(
+        'script' => $script,
+      ));
+
+      $custom_group_result = civicrm_api3('CustomGroup', 'getsingle', array(
+        'name' => 'zusatzinformationen_aktivitaeten_tage',
+      ));
+      CRM_Core_Resources::singleton()->addVars('uimods', array('activityDaysGroupId' => $custom_group_result['id']));
 
       $location_field = $form->getElement('location');
       $location_field->setLabel($location_field->getLabel() . ', Adresse der Aktivität');
