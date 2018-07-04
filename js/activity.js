@@ -50,6 +50,9 @@
     // Move additional information block before details block and format it as a
     // table.
     if ($detailsBlock.length && $additionalInformationDaysBlock.length) {
+      var $existing = $('[data-source="' + $additionalInformationDaysAnchor.attr('id') + '"]');
+      $additionalInformationDaysAnchor.remove();
+      $additionalInformationDaysBlock.attr('data-source', $additionalInformationDaysAnchor.attr('id'));
       $additionalInformationDaysBlock = $additionalInformationDaysBlock.changeElementType('tr');
       $additionalInformationDaysBlock
         .removeClass('crm-accordion-wrapper crm-custom-accordion')
@@ -57,7 +60,6 @@
           .first()
             .attr('class', 'label')
             .wrapInner('<label>')
-            .append($additionalInformationDaysAnchor)
             .end()
           .last()
             .attr('class', 'view-value')
@@ -92,6 +94,9 @@
           .next('.addon.fa-calendar').andSelf().hide();
       });
 
+      if ($existing.length) {
+        $existing.remove();
+      }
       $additionalInformationDaysBlock.insertBefore($detailsBlock);
     }
 
