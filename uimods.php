@@ -154,14 +154,12 @@ function uimods_civicrm_navigationMenu(&$menu) {
 /**
  * Implements hook_civicrm_buildForm().
  *
- * Set a default value for an event price set field.
- *
  * @param string $formName
  * @param CRM_Core_Form $form
  */
 function uimods_civicrm_buildForm($formName, &$form) {
   if ($formName == 'CRM_Activity_Form_Activity') {
-    // TODO: More form names where things need to be tampered with?
+    /* @var \CRM_Activity_Form_Activity $form */
     CRM_Uimods_Activity::buildForm($formName, $form);
   }
 }
@@ -171,25 +169,9 @@ function uimods_civicrm_buildForm($formName, &$form) {
  * @param CRM_Profile_Form $form
  */
 function uimods_civicrm_preProcess($formName, &$form) {
-  if (is_a($form, 'CRM_Activity_Form_Activity')) {
+  if ($formName == 'CRM_Activity_Form_Activity') {
     /* @var \CRM_Activity_Form_Activity $form */
-
-    // Make the subject field a select list with pre-defined options.
-    // Keys must be the same as values to not break displaying of activity
-    // subjects, thus, values may only contain characters valid for array keys.
-    $subject_options = array(
-      'öffentlich - mit DSD-Beteiligung' => 'öffentlich - mit DSD-Beteiligung',
-      'nicht öffentlich - mit DSD Beteiligung' => 'nicht öffentlich - mit DSD Beteiligung',
-      'öffentlich - ohne DSD-Beteiligung' => 'öffentlich - ohne DSD-Beteiligung',
-      'nicht öffentlich - ohne DSD-Beteiligung' => 'nicht öffentlich - ohne DSD-Beteiligung',
-    );
-    $form->_fields['subject'] = array(
-      'type' => 'select',
-      'label' => 'Öffentlich/ DSD-Beteiligung',
-      'attributes' => array('' => '- ' . ts('select subject') . ' -') + $subject_options,
-      'extra' => array('class' => 'crm-select2'),
-      'required' => TRUE,
-    );
+    CRM_Uimods_Activity::preProcess($formName, $form);
   }
 }
 
