@@ -71,7 +71,6 @@
         .find('.custom_field-row:nth-child(3n + 1)').each(function () {
         var $fields = $(this).add($(this).nextAll(':lt(2)'));
         var $row = $('<tr>').css('display', 'table-row').insertBefore($(this)).append($fields);
-        console.log($('<tr>').css('display', 'table-row').insertBefore($(this)).append($fields));
 
         // Resize time fields.
         $row.find('.crm-form-time')
