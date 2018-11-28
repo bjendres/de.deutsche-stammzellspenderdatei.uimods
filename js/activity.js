@@ -50,7 +50,7 @@
     // Move additional information block before details block and format it as a
     // table.
     if ($detailsBlock.length && $additionalInformationDaysBlock.length) {
-      var $existing = $('[data-source="' + $additionalInformationDaysAnchor.attr('id') + '"]');
+      var $existing = $('[data-source="' + $additionalInformationDaysAnchor.attr('id') + '"]', $activityForm);
       $additionalInformationDaysAnchor.remove();
       $additionalInformationDaysBlock.attr('data-source', $additionalInformationDaysAnchor.attr('id'));
       $additionalInformationDaysBlock = $additionalInformationDaysBlock.changeElementType('tr');
@@ -71,6 +71,7 @@
         .find('.custom_field-row:nth-child(3n + 1)').each(function () {
         var $fields = $(this).add($(this).nextAll(':lt(2)'));
         var $row = $('<tr>').css('display', 'table-row').insertBefore($(this)).append($fields);
+        console.log($('<tr>').css('display', 'table-row').insertBefore($(this)).append($fields));
 
         // Resize time fields.
         $row.find('.crm-form-time')
@@ -102,7 +103,7 @@
 
     // Hide the "Time" component of the activity_date_time field and remove its
     // value.
-    var $activityDateTimeFields = $('#activity_date_time').siblings('[name^="activity_date_time_display_"]').andSelf();
+    var $activityDateTimeFields = $('#activity_date_time', $activityForm).siblings('[name^="activity_date_time_display_"]').andSelf();
     $activityDateTimeFields.on('change', function() {
       $(this).siblings('#activity_date_time_time').val('');
     });
@@ -112,7 +113,13 @@
       .siblings('label[for="activity_date_time_time"]').hide();
 
     // Hide "Duration" block.
-    $('.crm-activity-form-block-duration').hide();
+    $('.crm-activity-form-block-duration', $activityForm).hide();
+
+    // Move "Activity status" field behind "Priority" field.
+    $('.crm-activity-form-block-status_id', $activityForm).insertAfter($('.crm-activity-form-block-priority_id', $activityForm));
+
+    // Hide "Priority" field.
+    $('.crm-activity-form-block-priority_id', $activityForm).hide();
   });
 
 })(cj);
