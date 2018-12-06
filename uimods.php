@@ -169,7 +169,10 @@ function uimods_civicrm_buildForm($formName, &$form) {
  * @param CRM_Profile_Form $form
  */
 function uimods_civicrm_preProcess($formName, &$form) {
-  if ($formName == 'CRM_Activity_Form_Activity') {
+  if (
+    $formName == 'CRM_Activity_Form_Activity'
+    || $formName == 'CRM_Activity_Form_Search'
+  ) {
     /* @var \CRM_Activity_Form_Activity $form */
     CRM_Uimods_Activity::preProcess($formName, $form);
   }
@@ -198,4 +201,61 @@ function uimods_civicrm_pageRun(&$page) {
 //      'script' => $script,
 //    ));
 //  }
+}
+
+/**
+ * Implements hook_civicrm_searchColumns().
+ *
+ * @param $objectName
+ * @param $headers
+ * @param $rows
+ * @param \CRM_Core_Selector_Controller $selector
+ *
+ * @link http://wiki.civicrm.org/confluence/display/CRMDOC/hook_civicrm_searchColumns
+ */
+function uimods_civicrm_searchColumns($objectName, &$headers, &$rows, &$selector) {
+  if ($objectName == 'activity') {
+    $actions = array_pop($headers);
+    unset($headers[2]);
+    $headers[] = array(
+      'name' => 'DSD-Betreuer',
+      'field_name' => 'dsd_betreuer',
+    );
+    $headers[] = array(
+      'name' => 'Standort',
+      'field_name' => 'standort',
+    );
+    $headers[] = $actions + array('field_name' => 'action');
+
+    // set the values for 'Balance Due' column
+    foreach ($rows as $key => $row) {
+      $activity = civicrm_api3('Activity', 'getsingle', array(
+        'id' => $row['activity_id'],
+        'return' => array(
+          'custom_7',
+          'location',
+        )
+      ));
+
+      $rows[$key]['dsd_betreuer'] = isset($activity['custom_7']) ? $activity['custom_5'] : NULL;
+      $rows[$key]['standort'] = isset($activity['location']) ? $activity['location'] : NULL;
+    }
+  }
+}
+
+/**
+ * The extra search column (see above) does not alter the template,
+ * so we inject javascript into the template-content.
+ */
+function uimods_civicrm_alterContent(&$content, $context, $tplName, &$object) {
+  // get page- resp. form-class of the object
+  $class_name = get_class($object);
+  if ($class_name == 'CRM_Activity_Form_Search') {
+    // parse the template with smarty
+    $smarty = CRM_Core_Smarty::singleton();
+    $path = E::path('/templates/CRM/Activity/SearchColumns.tpl');
+    $html = $smarty->fetch($path);
+    // append the html to the content
+    $content .= $html;
+  }
 }

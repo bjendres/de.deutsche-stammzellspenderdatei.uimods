@@ -66,22 +66,24 @@ class CRM_Uimods_Activity {
    * @param CRM_Activity_Form_Activity $form
    */
   public static function preProcess($formName, &$form) {
-    // Make the subject field a select list with pre-defined options.
-    // Keys must be the same as values to not break displaying of activity
-    // subjects, thus, values may only contain characters valid for array keys.
-    $subject_options = array(
-      'öffentlich - mit DSD-Beteiligung' => 'öffentlich - mit DSD-Beteiligung',
-      'nicht öffentlich - mit DSD Beteiligung' => 'nicht öffentlich - mit DSD Beteiligung',
-      'öffentlich - ohne DSD-Beteiligung' => 'öffentlich - ohne DSD-Beteiligung',
-      'nicht öffentlich - ohne DSD-Beteiligung' => 'nicht öffentlich - ohne DSD-Beteiligung',
-    );
-    $form->_fields['subject'] = array(
-      'type' => 'select',
-      'label' => 'Öffentlich/ DSD-Beteiligung',
-      'attributes' => array('' => '- ' . ts('select subject') . ' -') + $subject_options,
-      'extra' => array('class' => 'crm-select2'),
-      'required' => TRUE,
-    );
+    if ($formName == 'CRM_Activity_Form_Activity') {
+      // Make the subject field a select list with pre-defined options.
+      // Keys must be the same as values to not break displaying of activity
+      // subjects, thus, values may only contain characters valid for array keys.
+      $subject_options = array(
+        'öffentlich - mit DSD-Beteiligung' => 'öffentlich - mit DSD-Beteiligung',
+        'nicht öffentlich - mit DSD Beteiligung' => 'nicht öffentlich - mit DSD Beteiligung',
+        'öffentlich - ohne DSD-Beteiligung' => 'öffentlich - ohne DSD-Beteiligung',
+        'nicht öffentlich - ohne DSD-Beteiligung' => 'nicht öffentlich - ohne DSD-Beteiligung',
+      );
+      $form->_fields['subject'] = array(
+        'type' => 'select',
+        'label' => 'Öffentlich/ DSD-Beteiligung',
+        'attributes' => array('' => '- ' . E::ts('select subject') . ' -') + $subject_options,
+        'extra' => array('class' => 'crm-select2'),
+        'required' => TRUE,
+      );
+    }
   }
 
 }
