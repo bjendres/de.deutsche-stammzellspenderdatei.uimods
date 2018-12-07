@@ -232,12 +232,12 @@ function uimods_civicrm_searchColumns($objectName, &$headers, &$rows, &$selector
       $activity = civicrm_api3('Activity', 'getsingle', array(
         'id' => $row['activity_id'],
         'return' => array(
-          'custom_7',
+          'custom_5',
           'location',
         )
       ));
 
-      $rows[$key]['dsd_betreuer'] = isset($activity['custom_7']) ? $activity['custom_5'] : NULL;
+      $rows[$key]['dsd_betreuer'] = isset($activity['custom_5']) ? $activity['custom_5'] : NULL;
       $rows[$key]['standort'] = isset($activity['location']) ? $activity['location'] : NULL;
     }
   }
