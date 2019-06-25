@@ -52,11 +52,15 @@ class CRM_Uimods_Activity {
       // CustomGroup seems to not exist.
     }
 
-    $location_field = $form->getElement('location');
-    $location_field->setLabel($location_field->getLabel() . ', Adresse der Aktivität');
+    if ($form->elementExists('location')) {
+      $location_field = $form->getElement('location');
+      $location_field->setLabel($location_field->getLabel() . ', Adresse der Aktivität');
+    }
+    if ($form->elementExists('activity_date_time')) {
+      $date_field = $form->getElement('activity_date_time');
+      $date_field->setLabel($date_field->getLabel() . ', Beginn der Aktivität');
+    }
 
-    $date_field = $form->getElement('activity_date_time');
-    $date_field->setLabel($date_field->getLabel() . ', Beginn der Aktivität');
   }
 
   /**
